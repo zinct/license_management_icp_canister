@@ -1,0 +1,4 @@
+service: () -> {
+    createLicense: (principal, record {"principal":principal; expired:opt nat64; name:text; type:text}) -> (record {id:text; "principal":principal; expired:opt nat64; name:text; createdAt:nat64; type:text});
+    getLicenses: () -> (vec record {id:text; "principal":principal; expired:opt nat64; name:text; createdAt:nat64; type:text}) query;
+}

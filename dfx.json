@@ -1,0 +1,13 @@
+{
+    "canisters": {
+        "license_management_icp_canister": {
+            "type": "custom",
+            "main": "src/index.ts",
+            "candid": "src/index.did",
+            "build": "npx azle license_management_icp_canister",
+            "wasm": ".azle/license_management_icp_canister/license_management_icp_canister.wasm",
+            "gzip": true
+        }
+    }
+}
+
