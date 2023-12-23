@@ -1,4 +1,8 @@
 service: () -> {
-    createLicense: (principal, record {"principal":principal; expired:opt nat64; name:text; type:text}) -> (record {id:text; "principal":principal; expired:opt nat64; name:text; createdAt:nat64; type:text});
-    getLicenses: () -> (vec record {id:text; "principal":principal; expired:opt nat64; name:text; createdAt:nat64; type:text}) query;
+    checkLicense: (record {softwareId:text; serialNumber:text}) -> (variant {Ok:bool; Err:text}) query;
+    createLicense: (record {expired:opt nat64; softwareId:text; name:text; serialNumber:text}) -> (variant {Ok:record {id:text; expired:opt nat64; name:text; createdAt:nat64; isUsed:bool; serialNumber:text}; Err:text});
+    createSoftware: (text) -> (variant {Ok:record {id:text; "principal":principal; licenses:vec record {id:text; expired:opt nat64; name:text; createdAt:nat64; isUsed:bool; serialNumber:text}; name:text; createdAt:nat64}; Err:text});
+    getLicenseBySoftware: (text) -> (variant {Ok:vec record {id:text; expired:opt nat64; name:text; createdAt:nat64; isUsed:bool; serialNumber:text}; Err:text}) query;
+    getSoftwares: () -> (variant {Ok:vec record {id:text; "principal":principal; licenses:vec record {id:text; expired:opt nat64; name:text; createdAt:nat64; isUsed:bool; serialNumber:text}; name:text; createdAt:nat64}; Err:text}) query;
+    redeemSoftwareLicense: (record {softwareId:text; serialNumber:text}) -> (variant {Ok:record {id:text; expired:opt nat64; name:text; createdAt:nat64; isUsed:bool; serialNumber:text}; Err:text});
 }
